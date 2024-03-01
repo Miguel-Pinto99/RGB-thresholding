@@ -19,6 +19,8 @@ from mecheye.area_scan_3d_camera_utils import *
 
 class ClassConnectAndCaptureImage(object):
     def __init__(self):
+        # This class initializes various attributes related to capturing images and working with directories and monitor
+        # information.
         self.camera = Camera()
 
         self.abspath = os.path.abspath(__file__)
@@ -37,6 +39,20 @@ class ClassConnectAndCaptureImage(object):
         self.window_name = 'Color Segmenter'
 
     def onTrackbar(self, image, mode):
+
+        """
+        The function `onTrackbar` reads trackbar values for color thresholds, sets limits based on mode (RGB or HSV),
+        creates a mask, applies the mask to the image, and displays the result.
+
+        :param image: The `image` parameter in the `onTrackbar` function is the input image that you want to apply
+        thresholding on based on the trackbar values set by the user. The function reads trackbar values for different color
+        channels (B/H, G/S, R/V) and then creates a
+        :param mode: The `mode` parameter in the `onTrackbar` function is used to specify whether the thresholding should be
+        done in RGB color space or HSV color space. It determines how the trackbar values for each channel (B/G/R or H/S/V)
+        should be interpreted and applied to create the
+        :return: The function `onTrackbar` returns the `parameters` dictionary, which contains the limits for the color
+        channels (either RGB or HSV) based on the trackbar values set by the user.
+        """
 
 
         # Reading Trackbars (High is equal or bigger than Low)
@@ -114,6 +130,11 @@ class ClassConnectAndCaptureImage(object):
         return parameters
 
     def set_old_values(self):
+
+        """
+        The function `set_old_values` reads values from a JSON file and sets trackbar positions in a window based on the
+        retrieved values.
+        """
         # Open Json file
         with open(self.path_json_file, 'r') as json_file:
             parameters = json.load(json_file)
@@ -140,6 +161,13 @@ class ClassConnectAndCaptureImage(object):
         cv2.setTrackbarPos('HIGH R/V', self.window_name, maxs[2])
 
     def set_init_parameters(self):
+
+        """
+        The function `set_init_parameters` creates a Tkinter window with combo boxes for selecting image representation mode
+        and source, and returns the selected values.
+        :return: The `set_init_parameters` function returns the selected mode and source values from the Tkinter combo boxes
+        after the user has made their selections.
+        """
 
         #Creating Tkinter combo box for user input type of photo
         mode = ''
@@ -189,6 +217,10 @@ class ClassConnectAndCaptureImage(object):
             return mode,source
 
     def createTrackBars(self):
+
+        """
+        The function `createTrackBars` creates track bars for adjusting color thresholds in an OpenCV window.
+        """
         # Create Track bars
         min_threshold = 0
         max_threshold = 255
@@ -203,6 +235,19 @@ class ClassConnectAndCaptureImage(object):
         cv2.createTrackbar('HIGH R/V', self.window_name, min_threshold, max_threshold, self.onTrackbar)
 
     def keyboard_functions(self,key,parameters):
+
+        """
+        The function `keyboard_functions` handles key presses for writing data to a text file, exiting the program, and
+        setting old values if a file exists.
+
+        :param key: The `key` parameter in the `keyboard_functions` method seems to represent the key that was pressed by
+        the user. It is checked against certain conditions using the `ord` function to determine the action to be taken
+        based on the key pressed. In this case, the `ord` function converts the
+        :param parameters: It seems like you forgot to provide the details of the `parameters` variable. Could you please
+        share the content or structure of the `parameters` variable so that I can assist you further with the
+        `keyboard_functions` method?
+        """
+
         # Writing limits data in text file
         if key == ord('w'):
             with open(self.path_json_file, 'w') as file_handle:
@@ -220,6 +265,17 @@ class ClassConnectAndCaptureImage(object):
 
     def process_image(self,image):
 
+        """
+        The function processes an image by resizing it, applying morphological opening and closing operations using a
+        kernel, and then returning the processed image.
+
+        :param image: The code you provided seems to be a method for processing an image. It resizes the image to a specific
+        width and height, applies morphological operations (opening and closing) using a kernel of size (2, 2), and then
+        returns the processed image
+        :return: the processed image after resizing and applying morphological operations (opening and closing) using the
+        given kernel.
+        """
+
         width_monitor = self.width_monitor
         height_monitor = self.height_monitor
 
@@ -235,6 +291,14 @@ class ClassConnectAndCaptureImage(object):
         return image
 
     def get_image_Picture(self,mode):
+
+        """
+        This function allows the user to select an image file, convert it to HSV mode if specified, process the image,
+        display it, and interact with trackbars and keyboard functions.
+
+        :param mode: The `mode` parameter in the `get_image_Picture` function is used to specify the color space conversion
+        mode for the image processing. It can take on the values 'HSV' or any other mode supported by OpenCV
+        """
 
         filetype = (("Image files (*.png, *.jpg, *.bmp)", "*.png *.jpg *.bmp"), ("All Files", "*.*"))
         path_filename = tk.askopenfilenames(title="Select files...", initialdir=r".\\", filetypes=filetype)
@@ -258,7 +322,15 @@ class ClassConnectAndCaptureImage(object):
                 key = cv2.waitKey(20)
 
                 self.keyboard_functions(key, parameters)
+
     def get_image_WebCam(self, mode):
+        """
+        This function captures images from a webcam, converts them to HSV color space if specified, processes the images,
+        displays them, and allows for keyboard interactions.
+
+        :param mode: The `mode` parameter in the `get_image_WebCam` function is used to specify the color space conversion
+        mode for the captured image. It can take on the value of 'HSV' to convert the image from BGR to HSV color space
+        """
 
         self.createTrackBars()
         capture = cv2.VideoCapture(0)
@@ -279,7 +351,16 @@ class ClassConnectAndCaptureImage(object):
             key = cv2.waitKey(20)
 
             self.keyboard_functions(key, parameters)
+
     def get_image_MM(self, mode):
+        """
+        This Python function captures images from a camera, processes them based on a specified mode (e.g., HSV), and
+        displays the processed images with trackbars for parameter adjustment.
+
+        :param mode: The `mode` parameter in the `get_image_MM` method is used to specify the color space conversion mode
+        for the captured image. It can take on two possible values: 'HSV' or another value that is not specified in the
+        provided code snippet
+        """
         # Find existing Cameras
         if find_and_connect(self.camera):
 
@@ -310,6 +391,16 @@ class ClassConnectAndCaptureImage(object):
                 self.keyboard_functions(key, parameters)
 
     def check_file(self,mode):
+
+        """
+        This function checks if a JSON file exists, and if not, creates it with specific parameters based on the mode
+        provided.
+
+        :param mode: The `mode` parameter in the `check_file` method is used to determine whether the color space mode is
+        'HSV' or 'RGB'. Depending on the value of `mode`, different parameters are set for the color space limits. If `mode`
+        is 'HSV', the parameters include limits for
+        """
+
         if self.path_json_file_exists is False:
             with open(self.path_json_file, "w+") as file:
                 if mode == 'HSV':
@@ -329,7 +420,13 @@ class ClassConnectAndCaptureImage(object):
                 file.write(str(parameters))
         else:
             pass
+
     def main(self):
+
+        """
+        The main function determines the mode and source of input, then calls different functions based on the source
+        selected (Picture, WebCam, or MM).
+        """
 
         # Get mode from combobox: HSV and RGB
         mode,source = self.set_init_parameters()
