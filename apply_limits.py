@@ -10,6 +10,14 @@ window_name = 'Color Segmenter'
 
 
 def main(image):
+    """
+    The main function reads parameters from a JSON file, applies thresholding and masking to an input image based on the
+    mode specified in the JSON file, and returns the mask and masked image.
+
+    :param image: The `main` function you provided seems to be processing an image based on parameters loaded from a JSON
+    file. However, the code snippet you shared is incomplete as it ends abruptly after defining the function
+    :return: The function `main(image)` is returning two variables: `mask` and `masked_image`.
+    """
 
     #Build path to json folder and file
     root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -37,14 +45,14 @@ def main(image):
                          parameters['limits']['R']['max']])
 
     #Thresholding and masks
-    mask = cv2.inRange(image, mins, maxs)
+    mask_thresh = cv2.inRange(image, mins, maxs)
     kernel = np.ones((2, 2), np.uint8)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
-    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    mask_open = cv2.morphologyEx(mask_thresh, cv2.MORPH_OPEN, kernel)
+    mask = cv2.morphologyEx(mask_open, cv2.MORPH_CLOSE, kernel)
     masked_image = cv2.bitwise_and(image, image, mask=mask)
     if mode == 'HSV':
         masked_image = cv2.cvtColor(masked_image, cv2.COLOR_HSV2BGR)
-    return mask,masked_image
+    return mask, masked_image
 
 if __name__ == '__main__':
 
@@ -55,7 +63,7 @@ if __name__ == '__main__':
     path_image_file = f'{root_dir}\{name_directory}\{name_subdirectory_images}\{name_image_file}'
 
     image = cv2.imread(path_image_file)
-    mask,image = main(image)
-    hori = np.concatenate((image,cv2.cvtColor(mask,cv2.COLOR_GRAY2RGB)), axis=1)
-    cv2.imshow('asd',hori)
+    mask, image = main(image)
+    hori = np.concatenate((image, cv2.cvtColor(mask, cv2.COLOR_GRAY2RGB)), axis=1)
+    cv2.imshow('Image', hori)
     cv2.waitKey(0)
