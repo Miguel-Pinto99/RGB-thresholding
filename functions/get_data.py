@@ -1,6 +1,9 @@
 import os
 
-from mecheye.area_scan_3d_camera_utils import *
+from mecheye.shared import *
+from mecheye.area_scan_3d_camera import *
+from mecheye.area_scan_3d_camera_utils import find_and_connect
+
 import cv2
 import tkinter as tk
 
@@ -8,8 +11,9 @@ class Get_Data:
 
     def __init__(self):
 
-        self.image_to_capture = ''
+        self.image2d = None
         self.initialized = False
+        self.frame_2d = None
 
     def get_image_Picture(self,mode):
 
@@ -68,23 +72,30 @@ class Get_Data:
         provided code snippet
         """
 
-        image_to_capture = self.image_to_capture
+        image2d = self.image2d
+        frame_2d = self.frame_2d
         initialized = self.initialized
 
         if not initialized:
             camera = Camera()
-            find_and_connect(Camera())
+            find_and_connect(camera)
             frame_2d = Frame2D()
             show_error(camera.capture_2d(frame_2d))
+
             if frame_2d.color_type() == ColorTypeOf2DCamera_Monochrome:
                 image2d = frame_2d.get_gray_scale_image()
             elif frame_2d.color_type() == ColorTypeOf2DCamera_Color:
                 image2d = frame_2d.get_color_image()
 
             self.initialized = True
-            self.image_to_capture = image2d
+            self.image2d = image2d
+            self.frame_2d = frame_2d
 
-        _, image = image_to_capture.data()
-        if mode == 'HSV':
+        image = image2d.data()
+
+        if mode == 'HSV' and frame_2d.color_type() == ColorTypeOf2DCamera_Color:
+            image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        elif mode == 'HSV' and frame_2d.color_type() == ColorTypeOf2DCamera_Monochrome:
+            image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         return image
