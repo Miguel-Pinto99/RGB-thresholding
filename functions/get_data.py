@@ -23,7 +23,7 @@ class Get_Data:
         not.
         """
 
-        image_to_capture = self.image_to_capture
+        image2d = self.image2d
         initialized = self.initialized
 
         if not initialized:
@@ -32,9 +32,9 @@ class Get_Data:
             path_filename = tk.askopenfilenames(title="Select files...", initialdir=r".\\", filetypes=filetype)
 
             self.initialized = True
-            self.image_to_capture = cv2.imread(path_filename[0], cv2.IMREAD_COLOR)
+            self.image2d = cv2.imread(path_filename[0], cv2.IMREAD_COLOR)
 
-        image = image_to_capture
+        image = image2d
         if mode == 'HSV':
             image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         return image
@@ -48,15 +48,15 @@ class Get_Data:
         mode for the captured image. It can take on the value of 'HSV' to convert the image from BGR to HSV color space
         """
 
-        image_to_capture = self.image_to_capture
+        image2d = self.image2d
         initialized = self.initialized
 
         if not initialized:
-            image_to_capture = cv2.VideoCapture(0)
+            image2d = cv2.VideoCapture(0)
             self.initialized = True
-            self.image_to_capture = image_to_capture
+            self.image2d = image2d
 
-        _, image = image_to_capture.read()
+        _, image = image2d.read()
         if mode == 'HSV':
             image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         return image
