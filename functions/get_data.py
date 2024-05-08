@@ -14,6 +14,8 @@ class Get_Data:
         self.image2d = None
         self.initialized = False
         self.frame_2d = None
+        self.camera = None
+
 
     def get_image_Picture(self,mode):
 
@@ -72,30 +74,29 @@ class Get_Data:
         provided code snippet
         """
 
-        image2d = self.image2d
-        frame_2d = self.frame_2d
         initialized = self.initialized
+        camera = self.camera
 
         if not initialized:
             camera = Camera()
             find_and_connect(camera)
-            frame_2d = Frame2D()
-            show_error(camera.capture_2d(frame_2d))
-
-            if frame_2d.color_type() == ColorTypeOf2DCamera_Monochrome:
-                image2d = frame_2d.get_gray_scale_image()
-            elif frame_2d.color_type() == ColorTypeOf2DCamera_Color:
-                image2d = frame_2d.get_color_image()
 
             self.initialized = True
-            self.image2d = image2d
-            self.frame_2d = frame_2d
+            self.camera = camera
+
+        frame2d = Frame2D()
+        camera.capture_2d(frame2d)
+
+        if frame2d.color_type() == ColorTypeOf2DCamera_Monochrome:
+            image2d = frame2d.get_gray_scale_image()
+        elif frame2d.color_type() == ColorTypeOf2DCamera_Color:
+            image2d = frame2d.get_color_image()
 
         image = image2d.data()
 
-        if mode == 'HSV' and frame_2d.color_type() == ColorTypeOf2DCamera_Color:
+        if mode == 'HSV' and frame2d.color_type() == ColorTypeOf2DCamera_Color:
             image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-        elif mode == 'HSV' and frame_2d.color_type() == ColorTypeOf2DCamera_Monochrome:
+        elif mode == 'HSV' and frame2d.color_type() == ColorTypeOf2DCamera_Monochrome:
             image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
             image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         return image
