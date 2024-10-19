@@ -16,7 +16,6 @@ def main():
     while True:
         if source == 'Picture': image = get_data.get_image_Picture(mode)
         elif source == 'WebCam': image = get_data.get_image_WebCam(mode)
-        elif source == 'MM': image = get_data.get_image_MM(mode)
         else: raise Exception('No valid source')
 
         image = Image_Processing.prepare_image(image)

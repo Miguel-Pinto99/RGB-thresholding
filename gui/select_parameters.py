@@ -25,7 +25,6 @@ class Window_Select_Parameters:
 
     def define_name_and_icon(self,window):
         window.title('Image thresholding')
-        window.iconbitmap(fr'resources\icons\affix_logo.ico')
         return window
 
     def define_labels(self,window):
@@ -42,7 +41,7 @@ class Window_Select_Parameters:
     def define_combo_boxes(self, window):
 
         valid_boxes_mode = ['RGB', 'HSV']
-        valid_boxes_source = ['Picture', 'WebCam', 'MM']
+        valid_boxes_source = ['Picture', 'WebCam']
 
         option_select_mode = ttk.Combobox(window, values=valid_boxes_mode)
         option_select_mode.grid(row=1, column=1, sticky=W, pady=2)
