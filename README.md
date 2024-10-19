@@ -4,7 +4,8 @@
 
 Repository which holds a simple Python application that allows users to select thresholding values using radio buttons while capturing video from a webcam. This tool is useful for experimenting with different thresholding techniques in real-time, aiding in computer vision projects.
 
-![Uploading Screenshot 2024-10-19 180124.png…]()
+![Screenshot 2024-10-19 180124](https://github.com/user-attachments/assets/5f4915c0-57ad-49ad-afc8-56396e191ad3)
+
 
 ## Features
 
