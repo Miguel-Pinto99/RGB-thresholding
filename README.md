@@ -24,8 +24,9 @@ Repository which holds a simple Python application that allows users to select t
 
 1-Run the script:
 
-bash
+```
 python rgb_thresholding.py
+```
 
 2- Select the image source and the color representation.
 
@@ -35,8 +36,9 @@ python rgb_thresholding.py
 
 4- Apply limits to an image:
 
-bash
-python rgb_thresholding.py
+```
+python apply_limits.py
+```
 
 Dont forget to change the input.
 
