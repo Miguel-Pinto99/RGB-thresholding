@@ -1,7 +1,6 @@
-from tkinter import ttk
-import tkinter.filedialog as tk
 from screeninfo import get_monitors
-from tkinter import Label, W
+from tkinter import Label, W, ttk
+import tkinter.filedialog as tk
 
 
 class Window_Select_Parameters:
