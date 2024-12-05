@@ -1,0 +1,42 @@
+exclude: "^docs/|/migrations/|devcontainer.json|/generated/|proto|frontend/.yarn|server/protocol|frontend/.pnp.cjs|frontend/.pnp.loader.mjs|frontend/src/routeTree.gen.js"
+default_stages: [pre-commit]
+
+default_language_version:
+  python: python3.12
+
+repos:
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.19.0
+    hooks:
+      - id: pyupgrade
+        args: [--py313-plus]
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.19.0
+    hooks:
+      - id: pyupgrade
+        args: [--py313-plus]
+ci:
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false

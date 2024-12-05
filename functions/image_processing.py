@@ -2,10 +2,9 @@ import numpy as np
 from screeninfo import get_monitors
 import cv2
 
+
 class Image_Processing:
-
     def prepare_image(image):
-
         info_pc = get_monitors()
         height_monitor = info_pc[0].height
         width_monitor = info_pc[0].width

@@ -1,19 +1,15 @@
-import os
 import cv2
 import tkinter as tk
 
+
 class Get_Data:
-
     def __init__(self):
-
         self.image2d = None
         self.initialized = False
         self.frame_2d = None
         self.camera = None
 
-
-    def get_image_Picture(self,mode):
-
+    def get_image_Picture(self, mode):
         """
         This function retrieves an image file for processing.
         :return: the image that was captured or loaded based on the condition of whether the program has been initialized or
@@ -24,15 +20,19 @@ class Get_Data:
         initialized = self.initialized
 
         if not initialized:
-
-            filetype = (("Image files (*.png, *.jpg, *.bmp)", "*.png *.jpg *.bmp"), ("All Files", "*.*"))
-            path_filename = tk.askopenfilenames(title="Select files...", initialdir=r".\\", filetypes=filetype)
+            filetype = (
+                ("Image files (*.png, *.jpg, *.bmp)", "*.png *.jpg *.bmp"),
+                ("All Files", "*.*"),
+            )
+            path_filename = tk.askopenfilenames(
+                title="Select files...", initialdir=r".\\", filetypes=filetype
+            )
 
             self.initialized = True
             self.image2d = cv2.imread(path_filename[0], cv2.IMREAD_COLOR)
 
         image = image2d
-        if mode == 'HSV':
+        if mode == "HSV":
             image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         return image
 
@@ -54,6 +54,6 @@ class Get_Data:
             self.image2d = image2d
 
         _, image = image2d.read()
-        if mode == 'HSV':
+        if mode == "HSV":
             image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         return image
