@@ -6,7 +6,6 @@ Repository which holds a simple Python application that allows users to select t
 
 ![Screenshot 2024-10-19 180124](https://github.com/user-attachments/assets/5f4915c0-57ad-49ad-afc8-56396e191ad3)
 
-
 ## Features
 
 - Adjustable thresholding values using radio buttons
@@ -18,14 +17,21 @@ Repository which holds a simple Python application that allows users to select t
 - Python 3.x
 - OpenCV
 - NumPy
-- Tkinter (comes with standard Python installations)
+- uv
+- Pyside6
+
+## Setup
+
+```
+uv pip install -r requirements.txt
+```
 
 ## Usage
 
 1-Run the script:
 
 ```
-python rgb_thresholding.py
+uv run rgb_thresholding.py
 ```
 
 2- Select the image source and the color representation.
@@ -37,7 +43,7 @@ python rgb_thresholding.py
 4- Apply limits to an image:
 
 ```
-python apply_limits.py
+uv run apply_limits.py
 ```
 
 Dont forget to change the input.
@@ -47,6 +53,6 @@ Dont forget to change the input.
 ```
 w- write limits to json file
 q- Load last saved limits
-n- Change to RGB/HSV representation
+m/n- Change to RGB/HSV representation
 e- exit
 ```

@@ -5,11 +5,13 @@ from gui.select_parameters import Window_Select_Parameters
 from functions.get_data import Get_Data
 
 
-def main():
-    window_select_parameters = Window_Select_Parameters()
-    window_adjust_threshold = Window_Adjust_Threshold()
-    get_data = Get_Data()
+def main() -> None:
+    window_select_parameters: Window_Select_Parameters = Window_Select_Parameters()
+    window_adjust_threshold: Window_Adjust_Threshold = Window_Adjust_Threshold()
+    get_data: Get_Data = Get_Data()
 
+    mode: str
+    source: str
     mode, source = window_select_parameters.initialize()
     window_adjust_threshold.create_trackBars()
 

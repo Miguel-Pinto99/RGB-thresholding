@@ -3,13 +3,11 @@ import numpy as np
 from colorama import Fore, Style
 import json
 import os
+from typing import Any
 
 
 class Window_Adjust_Threshold:
     def __init__(self):
-        # This class initializes various attributes related to capturing images and working with directories and monitor
-        # information.
-
         self.window_dir = os.path.normpath(os.getcwd())
         self.name_directory = "resources"
         self.name_subdirectory_json = "json"
@@ -19,26 +17,10 @@ class Window_Adjust_Threshold:
 
         self.window_name = "Color Segmenter"
 
-    def get_trackbar_parameters(self, image, mode):
-        """
-        The function `get_trackbar_parameters` reads trackbar values for color thresholds, sets limits based on mode (RGB or HSV),
-        creates a mask, applies the mask to the image, and displays the result.
-
-        :param image: The `image` parameter in the `get_trackbar_parameters` function is the input image that you want to apply
-        thresholding on based on the trackbar values set by the user. The function reads trackbar values for different color
-        channels (B/H, G/S, R/V) and then creates a
-        :param mode: The `mode` parameter in the `get_trackbar_parameters` function is used to specify whether the thresholding should be
-        done in RGB color space or HSV color space. It determines how the trackbar values for each channel (B/G/R or H/S/V)
-        should be interpreted and applied to create the
-        :return: The function `get_trackbar_parameters` returns the `parameters` dictionary, which contains the limits for the color
-        channels (either RGB or HSV) based on the trackbar values set by the user.
-        """
-
-        # Reading Trackbars (High is equal or bigger than Low)
+    def get_trackbar_parameters(self, image: np.ndarray, mode: str) -> dict[str, Any]:
         Threshold_LOW_B_H = cv2.getTrackbarPos("LOW B/H", self.window_name)
         Threshold_HIGH_B_H = cv2.getTrackbarPos("HIGH B/H", self.window_name)
 
-        # Condition that prevents a minimal input higher than the maximum input
         if Threshold_HIGH_B_H < Threshold_LOW_B_H:
             cv2.setTrackbarPos("HIGH B/H", self.window_name, Threshold_LOW_B_H)
 
@@ -52,7 +34,6 @@ class Window_Adjust_Threshold:
         if Threshold_HIGH_R_V < Threshold_LOW_R_V:
             cv2.setTrackbarPos("HIGH R/V", self.window_name, Threshold_LOW_R_V)
 
-        # Defining limits by mode (HSV or RGB)
         if mode == "RGB":
             print("\n\nNew threshold defined by:\n")
             print(
@@ -167,7 +148,6 @@ class Window_Adjust_Threshold:
                 ]
             )
 
-        # Creating Mask with limits defined
         mask = cv2.inRange(image, mins, maxs)
         image_masked = cv2.bitwise_and(image, image, mask=mask)
 
@@ -178,16 +158,10 @@ class Window_Adjust_Threshold:
 
         return parameters
 
-    def set_old_values(self):
-        """
-        The function `set_old_values` reads values from a JSON file and sets trackbar positions in a window based on the
-        retrieved values.
-        """
-        # Open Json file
+    def set_old_values(self) -> None:
         with open(self.path_json_file) as json_file:
             parameters = json.load(json_file)
 
-        # Getting values from Json file
         mode = parameters["mode"]
         if mode == "HSV":
             mins = np.array(
@@ -227,11 +201,7 @@ class Window_Adjust_Threshold:
         cv2.setTrackbarPos("LOW R/V", self.window_name, mins[2])
         cv2.setTrackbarPos("HIGH R/V", self.window_name, maxs[2])
 
-    def create_trackBars(self):
-        """
-        The function `createTrackBars` creates track bars for adjusting color thresholds in an OpenCV window.
-        """
-        # Create Track bars
+    def create_trackBars(self) -> None:
         min_threshold = 0
         max_threshold = 255
         cv2.namedWindow(self.window_name)
@@ -280,16 +250,7 @@ class Window_Adjust_Threshold:
             self.get_trackbar_parameters,
         )
 
-    def check_file(self, mode):
-        """
-        This function checks if a JSON file exists, and if not, creates it with specific parameters based on the mode
-        provided.
-
-        :param mode: The `mode` parameter in the `check_file` method is used to determine whether the color space mode is
-        'HSV' or 'RGB'. Depending on the value of `mode`, different parameters are set for the color space limits. If `mode`
-        is 'HSV', the parameters include limits for
-        """
-
+    def check_file(self, mode: str) -> None:
         if self.path_json_file_exists is False:
             with open(self.path_json_file, "w+") as file:
                 if mode == "HSV":
@@ -314,20 +275,9 @@ class Window_Adjust_Threshold:
         else:
             pass
 
-    def keyboard_functions(self, key, mode, parameters):
-        """
-        The function `keyboard_functions` handles key presses for writing data to a text file, exiting the program, and
-        setting old values if a file exists.
-
-        :param key: The `key` parameter in the `keyboard_functions` method seems to represent the key that was pressed by
-        the user. It is checked against certain conditions using the `ord` function to determine the action to be taken
-        based on the key pressed. In this case, the `ord` function converts the
-        :param parameters: It seems like you forgot to provide the details of the `parameters` variable. Could you please
-        share the content or structure of the `parameters` variable so that I can assist you further with the
-        `keyboard_functions` method?
-        """
-
-        # Writing limits data in text file
+    def keyboard_functions(
+        self, key: int, mode: str, parameters: dict[str, Any]
+    ) -> str:
         if key == ord("w"):
             with open(self.path_json_file, "w") as file_handle:
                 print(

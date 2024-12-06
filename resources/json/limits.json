@@ -1,1 +1,1 @@
-{"limits": {"H": {"min": 0, "max": 100}, "S": {"min": 51, "max": 99}, "V": {"min": 99, "max": 255}}, "mode": "HSV"}
+{"limits": {"H": {"min": 0, "max": 0}, "S": {"min": 0, "max": 0}, "V": {"min": 0, "max": 0}}, "mode": "HSV"}
