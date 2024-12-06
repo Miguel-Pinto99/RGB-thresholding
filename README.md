@@ -12,12 +12,13 @@ Repository which holds a simple Python application that allows users to select t
 - Supports input from webcam or local image
 - Supports two color models (HSV and RGB)
 
-## Requirements
+## Tools
 
 - Python 3.x
 - OpenCV
 - NumPy
 - uv
+- pre-commit
 - Pyside6
 
 ## Setup
@@ -56,3 +57,15 @@ q- Load last saved limits
 m/n- Change to RGB/HSV representation
 e- exit
 ```
+
+## Using Pre-Commit Hooks
+Install pre-commit:
+```
+pre-commit install
+```
+
+Run all hooks manually:
+```
+pre-commit run --all-files
+```
+
