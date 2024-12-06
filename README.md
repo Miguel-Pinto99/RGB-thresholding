@@ -36,7 +36,7 @@ uv run rgb_thresholding.py
 
 2- Select the image source and the color representation.
 
-![image](https://github.com/user-attachments/assets/ccb1a735-dc2a-49d0-9e3e-7292ba4ed203)
+![image](https://github.com/user-attachments/assets/02ebef1d-a829-4abb-a22b-ba54b2ea3bb2)
 
 3- A window will open displaying the webcam feed. Use the radio buttons to select your desired thresholding limits and then press 'w'
 
