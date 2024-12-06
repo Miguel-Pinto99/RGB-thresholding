@@ -27,6 +27,17 @@ Repository which holds a simple Python application that allows users to select t
 uv pip install -r requirements.txt
 ```
 
+## Using Pre-Commit Hooks
+Install pre-commit:
+```
+pre-commit install
+```
+
+Run all hooks manually:
+```
+pre-commit run --all-files
+```
+
 ## Usage
 
 1-Run the script:
@@ -56,16 +67,5 @@ w- write limits to json file
 q- Load last saved limits
 m/n- Change to RGB/HSV representation
 e- exit
-```
-
-## Using Pre-Commit Hooks
-Install pre-commit:
-```
-pre-commit install
-```
-
-Run all hooks manually:
-```
-pre-commit run --all-files
 ```
 
