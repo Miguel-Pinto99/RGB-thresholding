@@ -20,7 +20,6 @@ Repository which holds a simple Python application that allows users to select t
 - uv
 - pre-commit
 - Pyside6
-- Tkinter
 
 ## Using Pre-Commit Hooks
 Install pre-commit:
@@ -63,4 +62,3 @@ q- Load last saved limits
 m/n- Change to RGB/HSV representation
 e- exit
 ```
-

@@ -1,5 +1,4 @@
 import cv2
-import tkinter as tk
 import easygui
 
 
@@ -17,14 +16,13 @@ class Get_Data:
         not.
         """
 
-        image2d = self.image2d
         initialized = self.initialized
 
         if not initialized:
             path_filename = easygui.fileopenbox(
                 title="Select image file",
                 default="*.png",
-                filetypes=["*.png", "*.jpg", "*.bmp"]
+                filetypes=["*.png", "*.jpg", "*.bmp"],
             )
 
             if path_filename:

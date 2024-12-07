@@ -2,7 +2,7 @@ exclude: "^docs/|/migrations/|devcontainer.json|/generated/|proto|frontend/.yarn
 default_stages: [pre-commit]
 
 default_language_version:
-  python: python3.12
+  python: python3.13
 
 repos:
   - repo: https://github.com/asottile/pyupgrade
