@@ -20,12 +20,7 @@ Repository which holds a simple Python application that allows users to select t
 - uv
 - pre-commit
 - Pyside6
-
-## Setup
-
-```
-uv pip install -r requirements.txt
-```
+- Tkinter
 
 ## Using Pre-Commit Hooks
 Install pre-commit:

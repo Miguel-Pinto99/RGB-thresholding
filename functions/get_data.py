@@ -1,5 +1,6 @@
 import cv2
 import tkinter as tk
+import easygui
 
 
 class Get_Data:
@@ -20,18 +21,19 @@ class Get_Data:
         initialized = self.initialized
 
         if not initialized:
-            filetype = (
-                ("Image files (*.png, *.jpg, *.bmp)", "*.png *.jpg *.bmp"),
-                ("All Files", "*.*"),
-            )
-            path_filename = tk.askopenfilenames(
-                title="Select files...", initialdir=r".\\", filetypes=filetype
+            path_filename = easygui.fileopenbox(
+                title="Select image file",
+                default="*.png",
+                filetypes=["*.png", "*.jpg", "*.bmp"]
             )
 
-            self.initialized = True
-            self.image2d = cv2.imread(path_filename[0], cv2.IMREAD_COLOR)
+            if path_filename:
+                self.initialized = True
+                self.image2d = cv2.imread(path_filename, cv2.IMREAD_COLOR)
+            else:
+                raise ValueError("No file selected")
 
-        image = image2d
+        image = self.image2d
         if mode == "HSV":
             image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         return image

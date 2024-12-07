@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "colorama>=0.4.6",
+    "easygui>=0.98.3",
     "opencv-python>=4.10.0.84",
     "pyside6>=6.8.1",
     "screeninfo>=0.8.1",
