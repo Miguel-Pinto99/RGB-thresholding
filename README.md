@@ -1,4 +1,4 @@
-# RGB_Thresholding
+# RGB-Thresholding
 
 ## Description
 
@@ -12,47 +12,46 @@ Repository which holds a simple Python application that allows users to select t
 - Supports input from webcam or local image
 - Supports two color models (HSV and RGB)
 
-## Tools
+## Tools and Libraries
+This project utilizes the following tools and libraries:
 
-- Python 3.x
-- OpenCV
-- NumPy
-- uv
-- pre-commit
-- Pyside6
-
-## Using Pre-Commit Hooks
-Install pre-commit:
-```
-pre-commit install
-```
-
-Run all hooks manually:
-```
-pre-commit run --all-files
-```
+- **Reflex**: A framework for building reactive web applications. [Reflex Documentation](https://reflex.dev/docs)
+- **UV**: A Python library for running applications. [UV Documentation](https://docs.astral.sh/uv/getting-started/installation/)
+- **pre-commit**: A framework for managing and maintaining multi-language pre-commit hooks. [pre-commit Documentation](https://pre-commit.com)
 
 ## Usage
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Miguel-Pinto99/RGB-thresholding.git
+    ```
 
-1-Run the script:
+2. Install UV:
+    ```bash
+    pip install uv
+    ```
 
-```
-uv run rgb_thresholding.py
-```
+3. Navigate to the project directory:
+    ```bash
+    cd RGB-thresholding
+    ```
 
-2- Select the image source and the color representation.
+4. Run the script:
+    ```bash
+    uv run rgb_thresholding.py
+    ```
 
-![image](https://github.com/user-attachments/assets/02ebef1d-a829-4abb-a22b-ba54b2ea3bb2)
+5. Select the image source and the color representation.
 
-3- A window will open displaying the webcam feed. Use the radio buttons to select your desired thresholding limits and then press 'w'
+    ![image](https://github.com/user-attachments/assets/02ebef1d-a829-4abb-a22b-ba54b2ea3bb2)
 
-4- Apply limits to an image:
+6. A window will open displaying the webcam feed. Use the radio buttons to select your desired thresholding limits and then press 'w'.
 
-```
-uv run apply_limits.py
-```
+7. Apply limits to an image:
+    ```bash
+    uv run apply_limits.py
+    ```
 
-Dont forget to change the input.
+    Don't forget to change the input.
 
 ## Instructions
 
