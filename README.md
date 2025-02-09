@@ -1,4 +1,4 @@
-# RGB_Thresholding
+# RGB-Thresholding
 
 ## Description
 
