@@ -15,7 +15,7 @@ Repository which holds a simple Python application that allows users to select t
 ## Tools and Libraries
 This project utilizes the following tools and libraries:
 
-- **Reflex**: A framework for building reactive web applications. [Reflex Documentation](https://reflex.dev/docs)
+- **OpenCV**: An open-source computer vision and machine learning software library. [OpenCV Documentation](https://docs.opencv.org/)
 - **UV**: A Python library for running applications. [UV Documentation](https://docs.astral.sh/uv/getting-started/installation/)
 - **pre-commit**: A framework for managing and maintaining multi-language pre-commit hooks. [pre-commit Documentation](https://pre-commit.com)
 
